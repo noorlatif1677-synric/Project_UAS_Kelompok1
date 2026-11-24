@@ -7,7 +7,7 @@
 - Bagian yang dikerjakan: 
 
 ### Mohammad Noor Latif
-- NIM: 
+- NIM: 263140701111030
 - Akun GitHub: 
 - Bagian yang dikerjakan: 
 
