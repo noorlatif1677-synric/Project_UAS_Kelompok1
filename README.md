@@ -3,7 +3,7 @@
 Kelas / Kelompok: T1C / Kelompok-1
 Link Repository: https://github.com/noorlatif1677-synric/Project_UAS_Kelompok1.git
 Link Laporan (Goggle Docs):
-Mata Kulih: Pemrogramman Dasar
+Mata Kuliah: Pemrogramman Dasar
 Tahun Akademik: 2026/2027
 
 ## Pembagian Tugas
