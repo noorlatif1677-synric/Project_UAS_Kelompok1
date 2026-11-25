@@ -9,8 +9,8 @@ Tahun Akademik: 2026/2027
 ## Pembagian Tugas
 
 ### Christian Rizky Ambarita
-- NIM: 
-- Akun GitHub: 
+- NIM: 263140701111015
+- Akun GitHub: christianrizkya-blip 
 - Bagian yang dikerjakan: 
 
 ### Mohammad Noor Latif
