@@ -1,5 +1,5 @@
-import * as readline from "readline-sync";
+import * as readlineSync from "readline-sync";
 
 let Nama: string;
-Nama = readline.question("Masukkan Nama Anda: ");
+Nama = readlineSync.question("Masukkan Nama Anda: ");
 console.log(`Halo, ${Nama}! Selamat datang di Toko Brawijaya.`);
