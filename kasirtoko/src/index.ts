@@ -125,3 +125,76 @@ function cekRingkasanToko(daftar: Barang[]): string {
     return "Semua stok aman";
   }
 }
+
+// --- [INTERAKSI USER & MENU UTAMA] ---
+function bacaTeks(pesan: string): string {
+  const jawaban: string = readlineSync.question(pesan);
+  return jawaban.trim();
+}
+
+function tampilkanMenu(): void {
+  const jumlahTersedia: number = daftarBarang.filter((b) => b.tersedia).length;
+  const infoGudang: string = cekRingkasanToko(daftarBarang);
+
+  console.log("\n=========================================");
+  console.log("   KASIR & MANAJEMEN STOCK TOKO BRAWIJAYA");
+  console.log("=========================================");
+  console.log(`Jumlah barang : ${daftarBarang.length} (tersedia: ${jumlahTersedia})`);
+  console.log(`Nilai stock   : ${formatRupiah(hitungTotalNilaiStok(daftarBarang))}`);
+  console.log(`Status gudang : ${infoGudang}`);
+  console.log("-----------------------------------------");
+  console.log("1. Tambah Barang (Create)");
+  console.log("2. Lihat Barang (Read)");
+  console.log("3. Ubah Barang (Update)");
+  console.log("4. Hapus Barang (Delete)");
+  console.log("5. Cari Barang (Search)");
+  console.log("6. Transaksi Kasir");
+  console.log("7. Keluar");
+}
+
+function fiturBelumTersedia(namaFitur: string): void {
+  console.log(`\n>> Fitur "${namaFitur}" akan dikerjakan pada progress berikutnya.`);
+}
+
+function mainMenu(): void {
+  inisialisasiKatalog();
+  let berjalan: boolean = true;
+
+  while (berjalan) {
+    tampilkanMenu();
+    const pilihan: string = bacaTeks("Pilih menu (1-7): ");
+
+    switch (pilihan) {
+      case "1":
+        fiturBelumTersedia("Tambah Barang");
+        break;
+      case "2":
+        fiturBelumTersedia("Lihat Barang");
+        break;
+      case "3":
+        fiturBelumTersedia("Ubah Barang");
+        break;
+      case "4":
+        fiturBelumTersedia("Hapus Barang");
+        break;
+      case "5":
+        fiturBelumTersedia("Cari Barang");
+        break;
+      case "6":
+        fiturBelumTersedia("Transaksi Kasir");
+        break;
+      case "7":
+        berjalan = false;
+        console.log("Terima kasih. Program selesai.");
+        break;
+      default:
+        if (pilihan === "") {
+          console.log("Input kosong! Masukkan angka 1 sampai 7.");
+        } else {
+          console.log(`Pilihan "${pilihan}" tidak valid! Masukkan angka 1 sampai 7.`);
+        }
+    }
+  }
+}
+
+mainMenu();
