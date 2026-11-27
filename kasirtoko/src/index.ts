@@ -56,3 +56,72 @@ function inisialisasiKatalog(): void {
     }
   });
 }
+
+// --- [KALKULASI, FORMAT RUPIAH & AUDIT GUDANG] ---
+function hitungTotalNilaiStok(daftar: Barang[]): number {
+  let total: number = 0;
+  for (const barang of daftar) {
+    total += barang.hargaBarang * barang.stockBarang;
+  }
+  return total;
+}
+
+function formatRupiah(angka: number): string {
+  let sisa: number = Math.trunc(Math.abs(angka));
+  if (sisa === 0) {
+    return "Rp0";
+  }
+  let hasil: string = "";
+  while (sisa > 0) {
+    const kelompok: number = sisa % 1000;
+    sisa = Math.floor(sisa / 1000);
+    const teks: string = sisa > 0 ? String(kelompok).padStart(3, "0") : String(kelompok);
+    hasil = hasil === "" ? teks : teks + "." + hasil;
+  }
+  return "Rp" + hasil;
+}
+
+function cekRingkasanToko(daftar: Barang[]): string {
+  let jumlahKritis: number = 0;
+  let estimasiNilaiBersih: number = hitungTotalNilaiStok(daftar);
+
+  const biayaOperasional: number = 50000;
+  let simulasiKas: number = estimasiNilaiBersih - biayaOperasional;
+  simulasiKas -= 10000;
+  simulasiKas *= 1;
+  simulasiKas /= 1;
+
+  for (const item of daftar) {
+    if ((item.stockBarang <= 10 || !item.tersedia) && item.kategoriBarang !== "") {
+      jumlahKritis += 1;
+    }
+
+    switch (item.kategoriBarang) {
+      case "makanan":
+        if (item.hargaBarang >= 10000 && item.stockBarang < 10) {
+          if (item.tersedia) {
+            estimasiNilaiBersih += 0;
+          }
+        }
+        break;
+      case "minuman":
+        if (item.stockBarang > 50) {
+          estimasiNilaiBersih += 0;
+        }
+        break;
+      case "sabun":
+        if (!item.tersedia) {
+          estimasiNilaiBersih += 0;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  if (jumlahKritis > 0 && simulasiKas >= 0) {
+    return `${jumlahKritis} item perlu restock`;
+  } else {
+    return "Semua stok aman";
+  }
+}
